@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tudo De Bom Passeios - Conecte-se conosco</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .description {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+        
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+        
+        .link {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            transform: translateX(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .link:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .link:hover::before {
+            width: 8px;
+        }
+        
+        .link i {
+            font-size: 24px;
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .link-text {
+            flex-grow: 1;
+        }
+        
+        .website { --color: #3498db; }
+        .whatsapp { --color: #25D366; }
+        .facebook { --color: #3b5998; }
+        .instagram { --color: #E1306C; }
+        
+        .website:hover { background: rgba(52, 152, 219, 0.2); }
+        .whatsapp:hover { background: rgba(37, 211, 102, 0.2); }
+        .facebook:hover { background: rgba(59, 89, 152, 0.2); }
+        .instagram:hover { background: rgba(225, 48, 108, 0.2); }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.7;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .watermark {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            opacity: 0.5;
+        }
+        
+        /* Efeito de bolhas flutuantes */
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: rise 15s infinite ease-in;
+        }
+        
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(100px);
+            }
+            100% {
+                bottom: 1080px;
+                transform: translateX(-200px);
+            }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .description {
+                font-size: 14px;
+            }
+            
+            .link {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubbles">
+        <!-- Bolhas serão adicionadas via JavaScript -->
+    </div>
+    
+<div class="container">
+        <div class="profile">
+          <img src="https://ucarecdn.com/32ea9b52-21cc-4ac3-b1b7-100fe671e8ff/68176017d279523de41734b5_Designsemnome2.png" alt="Tudo De Bom Passeios" class="profile-pic">
+            <h1>Tudo De Bom Passeios</h1>
+            <p class="description">Descubra os melhores destinos e experiências com a nossa equipe especializada em turismo!</p>
+        </div>
+        
+        <div class="links">
+          <a href="https://www.tudodebompasseios.com.br" target="_blank" class="link website" id="website">
+                <i class="fas fa-globe"></i>
+                <span class="link-text">Website Oficial</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            
+          <a href="https://wa.me/5512981722225" target="_blank" class="link whatsapp" id="whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span class="link-text">Fale conosco no WhatsApp</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            
+          <a href="https://www.facebook.com/profile.php?id=61562110752089" target="_blank" class="link facebook" id="facebook">
+                <i class="fab fa-facebook-f"></i>
+                <span class="link-text">Curta nossa página no Facebook</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            
+          <a href="https://www.instagram.com/tudo_de_bom_passeios" target="_blank" class="link instagram" id="instagram">
+                <i class="fab fa-instagram"></i>
+                <span class="link-text">Siga-nos no Instagram</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+        <div class="footer">
+          © 2025 Tudo De Bom Passeios. Todos os direitos reservados.
+      </div>
+    </div>
+<script>
+        // Cria bolhas flutuantes
+        const bubblesContainer = document.querySelector('.bubbles');
+        const bubbleCount = 20;
+        
+        for (let i = 0; i < bubbleCount; i++) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            
+            // Tamanho aleatório entre 10 e 60px
+            const size = Math.random() * 50 + 10;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            // Posição inicial aleatória
+            bubble.style.left = `${Math.random() * 100}%`;
+            
+            // Duração da animação aleatória
+            const duration = Math.random() * 10 + 10;
+            bubble.style.animationDuration = `${duration}s`;
+            
+            // Atraso aleatório
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            
+            bubblesContainer.appendChild(bubble);
+        }
+        
+        // Efeito de hover mais suave nos links
+        const links = document.querySelectorAll('.link');
+        
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                link.style.transform = 'translateX(5px)';
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                link.style.transform = 'translateX(0)';
+            });
+        });
+        
+        // Animação ao carregar os links
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('.link');
+            
+            links.forEach((link, index) => {
+                setTimeout(() => {
+                    link.style.opacity = '1';
+                    link.style.transform = 'translateX(0)';
+                }, 200 * index);
+            });
+        });
+    </script>
+</body>
+</html>
